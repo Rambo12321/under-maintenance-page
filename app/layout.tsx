@@ -1,0 +1,20 @@
+import type {Metadata} from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css'; // Global styles
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+
+export const metadata: Metadata = {
+  title: 'Project Name | Under Maintenance',
+  description: 'We are currently updating our website to bring you a better experience. Please check back soon.',
+};
+
+export default function RootLayout({children}: {children: React.ReactNode}) {
+  return (
+    <html lang="en" className={inter.variable}>
+      <body className="font-sans antialiased bg-zinc-950 text-zinc-50 selection:bg-zinc-800" suppressHydrationWarning>
+        {children}
+      </body>
+    </html>
+  );
+}

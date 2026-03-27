@@ -1,13 +1,13 @@
 "use client";
 
 import { type MouseEvent, useEffect, useState } from "react";
-import { Cormorant_Garamond } from "next/font/google";
+import Image from "next/image";
 import {
   motion,
   useMotionTemplate,
   useMotionValue,
   useReducedMotion,
-  AnimatePresence
+  AnimatePresence,
 } from "motion/react";
 import {
   Settings,
@@ -16,13 +16,8 @@ import {
   ArrowRight,
   ArrowLeft,
   Copy,
-  Check
+  Check,
 } from "lucide-react";
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
 
 interface Particle {
   id: number;
@@ -103,12 +98,27 @@ export default function MaintenancePage() {
               animate={{
                 y: ["0vh", "-110vh"],
                 opacity: [0, 0.6, 0],
-                x: ["0px", "20px", "-20px", "0px"]
+                x: ["0px", "20px", "-20px", "0px"],
               }}
               transition={{
-                y: { duration: p.duration, delay: p.delay, repeat: Infinity, ease: "linear" },
-                opacity: { duration: p.duration, delay: p.delay, repeat: Infinity, ease: "linear" },
-                x: { duration: p.duration * 0.5, delay: p.delay, repeat: Infinity, ease: "easeInOut" }
+                y: {
+                  duration: p.duration,
+                  delay: p.delay,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+                opacity: {
+                  duration: p.duration,
+                  delay: p.delay,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+                x: {
+                  duration: p.duration * 0.5,
+                  delay: p.delay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
               }}
             />
           ))}
@@ -124,29 +134,38 @@ export default function MaintenancePage() {
       )}
 
       {/* Header */}
-      <header className="relative z-10 w-full p-4 md:p-6 flex justify-center shrink-0">
+      <header className="relative z-10 w-full p-4 md:p-6 flex flex-col items-center justify-center shrink-0 gap-4">
+        <div className="relative w-48 h-16 md:w-64 md:h-20">
+          <Image
+            src="/logo.png"
+            alt="Career Plus Placement"
+            fill
+            className="object-contain drop-shadow-lg"
+            priority
+          />
+        </div>
         <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
-
           <span className="text-[10px] font-medium uppercase tracking-widest text-stone-300">
-            Career Plus Placement • System Update
+            Career Placement Plus | System Update
           </span>
         </div>
       </header>
 
       {/* Main Content - Centered */}
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center w-full max-w-5xl mx-auto px-6 min-h-0">
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="text-center mb-6 md:mb-8"
         >
-          <h1 className={`${cormorant.className} text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-white mb-4`}>
-            Upgrading the <span className="italic text-stone-400">Experience.</span>
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light leading-[1.1] tracking-tight text-white mb-4">
+            Upgrading the{" "}
+            <span className="italic text-stone-400">Experience.</span>
           </h1>
           <p className="text-stone-400 text-xs sm:text-sm max-w-lg mx-auto font-light leading-relaxed">
-            We are currently refining our platform to serve our distinguished clients and exceptional candidates better.
+            We are currently refining our platform to serve our distinguished
+            clients and exceptional candidates better.
           </p>
         </motion.div>
 
@@ -163,28 +182,44 @@ export default function MaintenancePage() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            className={`absolute inset-0 rounded-full border border-dashed transition-colors duration-500 ${isHoveringGear ? 'border-white/20' : 'border-white/5'}`}
+            className={`absolute inset-0 rounded-full border border-dashed transition-colors duration-500 ${isHoveringGear ? "border-white/20" : "border-white/5"}`}
           />
 
           {/* Glow behind gears */}
-          <div className={`absolute inset-0 bg-stone-400/10 rounded-full blur-3xl transition-all duration-700 ${isHoveringGear ? 'scale-150 opacity-100' : 'scale-100 opacity-50'}`} />
+          <div
+            className={`absolute inset-0 bg-stone-400/10 rounded-full blur-3xl transition-all duration-700 ${isHoveringGear ? "scale-150 opacity-100" : "scale-100 opacity-50"}`}
+          />
 
           {/* Big Gear */}
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: isHoveringGear ? 4 : 20, repeat: Infinity, ease: "linear" }}
+            transition={{
+              duration: isHoveringGear ? 4 : 20,
+              repeat: Infinity,
+              ease: "linear",
+            }}
             className="absolute"
           >
-            <Settings className="w-24 h-24 md:w-32 md:h-32 text-stone-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" strokeWidth={1} />
+            <Settings
+              className="w-24 h-24 md:w-32 md:h-32 text-stone-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+              strokeWidth={1}
+            />
           </motion.div>
 
           {/* Small Gear */}
           <motion.div
             animate={{ rotate: -360 }}
-            transition={{ duration: isHoveringGear ? 2 : 10, repeat: Infinity, ease: "linear" }}
+            transition={{
+              duration: isHoveringGear ? 2 : 10,
+              repeat: Infinity,
+              ease: "linear",
+            }}
             className="absolute top-4 right-4 md:top-6 md:right-6"
           >
-            <Settings className="w-10 h-10 md:w-16 md:h-16 text-stone-500" strokeWidth={1.5} />
+            <Settings
+              className="w-10 h-10 md:w-16 md:h-16 text-stone-500"
+              strokeWidth={1.5}
+            />
           </motion.div>
 
           {/* Intuitive Hover Prompt with Arrows */}
@@ -203,7 +238,11 @@ export default function MaintenancePage() {
                   </span>
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
                   >
                     <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-stone-300" />
                   </motion.div>
@@ -218,7 +257,12 @@ export default function MaintenancePage() {
                 >
                   <motion.div
                     animate={{ x: [0, -5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.2,
+                    }}
                   >
                     <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-stone-300" />
                   </motion.div>
@@ -228,7 +272,6 @@ export default function MaintenancePage() {
                 </motion.div>
 
                 {/* Bottom Badge */}
-
               </>
             )}
           </AnimatePresence>
@@ -237,22 +280,30 @@ export default function MaintenancePage() {
           <AnimatePresence>
             {isHoveringGear && (
               <motion.div
-                initial={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
+                initial={{
+                  opacity: 0,
+                  y: 10,
+                  scale: 0.95,
+                  filter: "blur(4px)",
+                }}
                 animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
                 transition={{ duration: 0.3 }}
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 md:w-80 p-5 md:p-6 rounded-2xl bg-black/80 border border-white/10 backdrop-blur-xl text-center z-50 shadow-2xl pointer-events-none"
               >
                 <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-stone-300 mx-auto mb-2 md:mb-3" />
-                <h3 className="text-stone-100 font-medium mb-1.5 md:mb-2 tracking-wide text-xs md:text-sm uppercase">Behind the Scenes</h3>
+                <h3 className="text-stone-100 font-medium mb-1.5 md:mb-2 tracking-wide text-xs md:text-sm uppercase">
+                  Behind the Scenes
+                </h3>
                 <p className="text-stone-400 text-[10px] md:text-xs leading-relaxed">
-                  Rebuilding our infrastructure from the ground up. Integrating advanced AI matching and streamlining our portals for a seamless, next-generation hiring experience.
+                  Rebuilding our infrastructure from the ground up. Integrating
+                  advanced AI matching and streamlining our portals for a
+                  seamless, next-generation hiring experience.
                 </p>
               </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
-
       </main>
 
       {/* Footer / Contacts */}
@@ -265,7 +316,9 @@ export default function MaintenancePage() {
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-white/10"></div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-medium">Get in touch</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-medium">
+              Get in touch
+            </p>
             <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-white/10"></div>
           </div>
 
@@ -279,13 +332,19 @@ export default function MaintenancePage() {
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-stone-500">For Candidates</p>
-                  <p className="text-sm text-stone-300 group-hover:text-white transition-colors">hr@careerplus-jobs.com</p>
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-stone-500">
+                    For Candidates
+                  </p>
+                  <p className="text-sm text-stone-300 group-hover:text-white transition-colors">
+                    hr@careerplus-jobs.com
+                  </p>
                 </div>
               </div>
               {copiedEmail === "hr@careerplus-jobs.com" ? (
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] uppercase tracking-widest text-green-400 font-medium">Copied</span>
+                  <span className="text-[10px] uppercase tracking-widest text-green-400 font-medium">
+                    Copied
+                  </span>
                   <Check className="w-4 h-4 text-green-400" />
                 </div>
               ) : (
@@ -302,13 +361,19 @@ export default function MaintenancePage() {
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-stone-500">For Clients</p>
-                  <p className="text-sm text-stone-300 group-hover:text-white transition-colors">info@careerplus-jobs.com</p>
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-stone-500">
+                    For Clients
+                  </p>
+                  <p className="text-sm text-stone-300 group-hover:text-white transition-colors">
+                    info@careerplus-jobs.com
+                  </p>
                 </div>
               </div>
               {copiedEmail === "info@careerplus-jobs.com" ? (
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] uppercase tracking-widest text-green-400 font-medium">Copied</span>
+                  <span className="text-[10px] uppercase tracking-widest text-green-400 font-medium">
+                    Copied
+                  </span>
                   <Check className="w-4 h-4 text-green-400" />
                 </div>
               ) : (
